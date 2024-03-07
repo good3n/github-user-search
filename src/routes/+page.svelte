@@ -17,7 +17,7 @@
 	async function getUserDetails(user: { login: any }) {
 		const response = await fetch(`https://api.github.com/users/${user.login}`, {
 			headers: {
-				Authorization: `token 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`
+				Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}`
 			}
 		});
 		if (response.ok) {
