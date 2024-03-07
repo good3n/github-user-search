@@ -4,11 +4,12 @@ export default {
 	theme: {
 		container: {
 			center: true,
-			padding: '16px',
-			screens: {
-				lg: '900px',
-				md: '100%'
-			}
+			padding: '16px'
+		},
+		screens: {
+			sm: '640px',
+			md: '768px',
+			lg: '900px'
 		},
 		extend: {
 			fontFamily: {
