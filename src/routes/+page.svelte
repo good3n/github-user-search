@@ -116,6 +116,7 @@
 								{location}
 							</p>
 						{/if}
+
 						{#if twitter_username}
 							<p class="flex items-center gap-x-4">
 								<svg
@@ -132,12 +133,14 @@
 								>
 							</p>
 						{/if}
+
 						{#if blog}
 							<p class="flex items-center gap-x-4">
 								<Icon class="w-6 shrink-0 text-white" src={Link} solid />
 								<a href={blog} target="_blank">{blog}</a>
 							</p>
 						{/if}
+
 						{#if company}
 							<p class="flex items-center gap-x-4">
 								<Icon class="w-6 shrink-0 text-white" src={BuildingOffice} solid />
