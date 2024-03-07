@@ -1,22 +1,39 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { Icon, MapPin, Link, BuildingOffice, MagnifyingGlass } from 'svelte-hero-icons';
 
-	// search query
-	let searchQuery = '';
-	// users array
-	let users: any[] = [];
+	let searchQuery = ''; // search query
+	let users: any[] = []; // user array
+	let currentPage = 1; // current page
+	const usersPerPage = 3; // users per page
+	let hasSearched = false; // has searched status
+
+	async function initialSearch() {
+		// reset the users array
+		users = [];
+		// reset the current page
+		currentPage = 1;
+		// search for users
+		await search();
+	}
 
 	async function search() {
+		// set has searched status
+		hasSearched = false;
 		// fetch users from GitHub API
-		const response = await fetch(`https://api.github.com/search/users?q=${searchQuery}`);
-		// if the response ok
+		const response = await fetch(
+			`https://api.github.com/search/users?q=${searchQuery}&page=${currentPage}&per_page=${usersPerPage}`
+		);
+		// if response ok
 		if (response.ok) {
 			// get the data
 			const data = await response.json();
 			// map over the items to get the user details
-			users = await Promise.all(data.items.map(getUserDetails));
+			const newUsers = await Promise.all(data.items.map(getUserDetails));
+			users = [...users, ...newUsers];
+			// set has searched status
+			hasSearched = true;
 		} else {
-			// log the error
 			console.error('Error:', response.status, response.statusText);
 		}
 	}
@@ -39,6 +56,20 @@
 			return user;
 		}
 	}
+
+	function handleChange() {
+		// reset user search status
+		hasSearched = false;
+	}
+
+	function loadMore() {
+		// increment the current page
+		currentPage++;
+		// search for more users
+		search();
+	}
+
+	onMount(search);
 </script>
 
 <div class="container pt-24 pb-48 relative z-10">
@@ -51,14 +82,18 @@
 
 	<form
 		class="bg-slate-800 rounded-xl px-2 py-2 flex justify-between mt-12 items-center"
-		on:submit|preventDefault={search}
+		on:submit|preventDefault={initialSearch}
 	>
 		<Icon class="w-8 shrink-0 text-blue-500 ml-3" src={MagnifyingGlass} solid />
+		<!-- svelte-ignore a11y-autofocus -->
 		<input
 			class="bg-transparent px-6 outline-0 w-full"
 			type="text"
 			bind:value={searchQuery}
+			on:input={handleChange}
 			placeholder="Search GitHub users..."
+			required
+			autofocus
 		/>
 		<button type="submit">Search</button>
 	</form>
@@ -151,5 +186,11 @@
 				</div>
 			</div>
 		{/each}
+		{#if searchQuery !== '' && users.length === 0 && hasSearched}
+			<p class="text-center mt-8 text-slate-400">No users found</p>
+		{/if}
+		{#if users.length !== 0}
+			<button on:click={loadMore} class="block mx-auto mt-8">Load More</button>
+		{/if}
 	</div>
 </div>
