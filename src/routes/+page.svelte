@@ -101,7 +101,7 @@
 			alt="GitHub Logo"
 		/>
 	{:else}
-		<div class="h-48 w-48"></div>
+		<div class="w-32 h-32 lg:w-48 lg:h-48"></div>
 	{/if}
 	<h1 class="text-2xl lg:text-3xl text-center mt-8">GitHub User Search</h1>
 
