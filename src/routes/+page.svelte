@@ -112,13 +112,12 @@
 		<Icon class="w-8 shrink-0 text-blue-500 ml-3 hidden lg:block" src={MagnifyingGlass} solid />
 		<!-- svelte-ignore a11y-autofocus -->
 		<input
-			class="bg-transparent px-6 !outline-0 w-full"
+			class="bg-transparent px-4 lg:px-6 !outline-0 w-full"
 			type="text"
 			bind:value={searchQuery}
 			on:input={handleChange}
 			placeholder="Search GitHub users..."
 			required
-			autofocus
 		/>
 		<button type="submit">Search</button>
 	</form>
