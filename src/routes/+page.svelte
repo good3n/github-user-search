@@ -1,28 +1,40 @@
 <script lang="ts">
 	import { Icon, MapPin, Link, BuildingOffice, MagnifyingGlass } from 'svelte-hero-icons';
 
+	// search query
 	let searchQuery = '';
+	// users array
 	let users: any[] = [];
 
 	async function search() {
+		// fetch users from GitHub API
 		const response = await fetch(`https://api.github.com/search/users?q=${searchQuery}`);
+		// if the response ok
 		if (response.ok) {
+			// get the data
 			const data = await response.json();
+			// map over the items to get the user details
 			users = await Promise.all(data.items.map(getUserDetails));
 		} else {
+			// log the error
 			console.error('Error:', response.status, response.statusText);
 		}
 	}
 
 	async function getUserDetails(user: { login: any }) {
+		// fetch user details from GitHub API
 		const response = await fetch(`https://api.github.com/users/${user.login}`, {
+			// add the authorization header to avoid rate limiting
 			headers: {
 				Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}`
 			}
 		});
+		// if the response ok
 		if (response.ok) {
+			// return the user details
 			return await response.json();
 		} else {
+			// log the error
 			console.error('Failed to fetch user details:', response.status, response.statusText);
 			return user;
 		}
