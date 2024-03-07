@@ -481,3 +481,16 @@
 		<rect width="36" height="36" x="1840" y="280" fill="#0E4429" rx="8" />
 	</svg>
 </div>
+
+<footer class="container text-white/30 text-sm flex justify-center gap-x-2">
+	Made with <svg
+		class="fill-white/30 w-4"
+		viewBox="0 0 426.67 426.67"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<path
+			d="M401.79 74.48c-63.5-82.44-188.45-33.8-188.45 49.92 0-83.72-124.96-132.36-188.46-49.92-65.63 85.22-.94 234.5 188.46 320.26C402.74 309 467.42 159.7 401.79 74.48z"
+		/>
+	</svg>
+	in Svelte by <a href="https://github.com/good3n" target="_blank">@good3n</a>
+</footer>
