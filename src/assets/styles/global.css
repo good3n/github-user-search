@@ -9,7 +9,7 @@ body {
 }
 
 button {
-	@apply !bg-blue-700 text-white rounded-lg px-6 py-3 lg:px-8 lg:py-4;
+	@apply block !bg-blue-700 text-white rounded-lg py-3 lg:py-4 h-12 lg:h-14 relative text-center;
 }
 
 a {
