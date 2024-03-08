@@ -482,7 +482,7 @@
 	</svg>
 </div>
 
-<footer class="container text-white/30 text-sm flex justify-center gap-x-2">
+<footer class="container text-white/30 text-sm flex justify-center gap-x-2 relative z-10">
 	Made with <svg
 		class="fill-white/30 w-4"
 		viewBox="0 0 426.67 426.67"
